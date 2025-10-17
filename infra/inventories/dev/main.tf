@@ -1,17 +1,3 @@
-###########################
-# INEP TABLE MANAGER (DEV)
-###########################
-
-terraform {
-  required_version = ">= 1.5.0"
-  required_providers {
-    aws = {
-      source  = "hashicorp/aws"
-      version = "~> 5.0"
-    }
-  }
-}
-
 provider "aws" {
   region = var.region
 }
@@ -19,24 +5,15 @@ provider "aws" {
 module "inep_governed" {
   source = "../../governed"
 
-  # Inputs
-  region         = var.region
-  s3_bucket_sor  = var.s3_bucket_sor
-  s3_bucket_sot  = var.s3_bucket_sot
-  s3_bucket_spec = var.s3_bucket_spec
+  # nomes dos bancos (padrão *_db_name_source)
+  sor_db_name_source  = var.sor_db_name_source
+  sot_db_name_source  = var.sot_db_name_source
+  spec_db_name_source = var.spec_db_name_source
 
-  db_sor_name  = var.db_sor_name
-  db_sot_name  = var.db_sot_name
-  db_spec_name = var.db_spec_name
-
-  default_tags = {
-    Project     = var.project
-    Owner       = var.owner
-    Environment = var.environment
-  }
+  # ambiente para tags do bucket
+  env = var.env
 }
 
-# Expondo saídas úteis
 output "glue_databases" {
   value = {
     sor  = module.inep_governed.db_sor_name

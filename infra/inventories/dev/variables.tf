@@ -20,17 +20,17 @@ variable "s3_bucket_spec" {
   description = "S3 bucket for SPEC layer"
 }
 
-variable "db_sor_name" {
+variable "sor_db_name_source" {
   type        = string
   description = "Glue database name for SOR"
 }
 
-variable "db_sot_name" {
+variable "sot_db_name_source" {
   type        = string
   description = "Glue database name for SOT"
 }
 
-variable "db_spec_name" {
+variable "spec_db_name_source" {
   type        = string
   description = "Glue database name for SPEC"
 }
@@ -38,3 +38,4 @@ variable "db_spec_name" {
 variable "project"     { type = string }
 variable "owner"       { type = string }
 variable "environment" { type = string }
+variable "env"         { type = string }
